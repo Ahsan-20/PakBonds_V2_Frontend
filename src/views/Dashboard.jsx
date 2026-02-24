@@ -55,16 +55,35 @@ const formatDate = (date) => {
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 };
 
-// Utility: Calc next draw
-const calculateExpectedNext = (latestStr) => {
-    const latest = parseDrawDate(latestStr);
-    if (!latest || isNaN(latest.getTime())) return null;
+// Official draw schedule: { denomination: { months: [...], day: number } }
+const DRAW_SCHEDULE = {
+    '100': { months: [2, 5, 8, 11], day: 15 },   // Feb, May, Aug, Nov — 15th
+    '200': { months: [3, 6, 9, 12], day: 15 },   // Mar, Jun, Sep, Dec — 15th
+    '750': { months: [1, 4, 7, 10], day: 15 },   // Jan, Apr, Jul, Oct — 15th
+    '1500': { months: [2, 5, 8, 11], day: 15 },   // Feb, May, Aug, Nov — 15th
+    '25000': { months: [3, 6, 9, 12], day: 10 },   // Mar, Jun, Sep, Dec — 10th
+    '40000': { months: [3, 6, 9, 12], day: 10 },   // Mar, Jun, Sep, Dec — 10th
+};
+
+// Utility: Calc next draw based on official schedule
+const calculateExpectedNext = (denomValue) => {
+    const schedule = DRAW_SCHEDULE[denomValue];
+    if (!schedule) return null;
+
     const today = new Date(); today.setHours(0, 0, 0, 0);
-    let expected = new Date(latest);
-    expected.setMonth(expected.getMonth() + 3);
-    while (expected < today) expected.setMonth(expected.getMonth() + 3);
-    const days = Math.ceil((expected - today) / 86400000);
-    return { date: expected, daysUntil: days };
+    const year = today.getFullYear();
+
+    // Check this year's remaining draws, then next year
+    for (let y = year; y <= year + 1; y++) {
+        for (const month of schedule.months) {
+            const drawDate = new Date(y, month - 1, schedule.day);
+            if (drawDate >= today) {
+                const days = Math.ceil((drawDate - today) / 86400000);
+                return { date: drawDate, daysUntil: days };
+            }
+        }
+    }
+    return null;
 };
 
 // Utility: Format Numbers (Compact)
@@ -154,7 +173,7 @@ const DrawScheduleWidget = () => {
                 const dates = Object.keys(r.data).sort((a, b) => parseDrawDate(b) - parseDrawDate(a));
                 if (dates.length) {
                     setLatestDate(dates[0]);
-                    setExpectedDraw(calculateExpectedNext(dates[0]));
+                    setExpectedDraw(calculateExpectedNext(selected.value));
                 } else {
                     setLatestDate(null);
                     setExpectedDraw(null);
