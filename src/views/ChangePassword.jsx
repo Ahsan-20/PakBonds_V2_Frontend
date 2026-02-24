@@ -79,7 +79,7 @@ const ChangePassword = () => {
                 new_password: formData.newPassword
             });
 
-            toast.success('Security protocols updated successfully!');
+            toast.success('Password changed successfully!');
             router.push('/dashboard');
         } catch (error) {
             const message = error.response?.data?.detail || 'Failed to update credentials';
@@ -118,9 +118,9 @@ const ChangePassword = () => {
                             <KeyRound size={32} className="text-cyan-400" />
                         </div>
                     </div>
-                    <h1 className="text-3xl font-bold text-white tracking-tight mb-2">Security <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Upgrade</span></h1>
+                    <h1 className="text-3xl font-bold text-white tracking-tight mb-2">Change <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Password</span></h1>
                     <p className="text-zinc-500 text-sm max-w-xs mx-auto">
-                        Elevate your account clearance with a stronger passkey.
+                        Set a new password for your account.
                     </p>
                 </div>
 
@@ -133,7 +133,7 @@ const ChangePassword = () => {
                         {/* Current Password */}
                         <div>
                             <label className="text-xs font-mono text-cyan-400 uppercase tracking-widest ml-1 mb-2 block">
-                                Current Access Key
+                                Current Password
                             </label>
                             <div className="relative group">
                                 <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-cyan-400 transition-colors" />
@@ -164,7 +164,7 @@ const ChangePassword = () => {
                         {/* New Password */}
                         <div>
                             <label className="text-xs font-mono text-purple-400 uppercase tracking-widest ml-1 mb-2 block">
-                                New Access Key
+                                New Password
                             </label>
                             <div className="relative group">
                                 <KeyRound size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-purple-400 transition-colors" />
@@ -195,7 +195,7 @@ const ChangePassword = () => {
                             {formData.newPassword && (
                                 <div className="mt-3 p-3 bg-white/5 rounded-xl border border-white/5">
                                     <div className="flex items-center justify-between mb-2">
-                                        <span className="text-[10px] uppercase tracking-widest text-zinc-500">Encryption Level</span>
+                                        <span className="text-[10px] uppercase tracking-widest text-zinc-500">Password Strength</span>
                                         <span className={`text-xs font-bold ${passwordStrength.strength >= 80 ? 'text-cyan-400' :
                                             passwordStrength.strength >= 60 ? 'text-yellow-400' :
                                                 'text-red-400'
@@ -220,7 +220,7 @@ const ChangePassword = () => {
                         {/* Confirm Password */}
                         <div>
                             <label className="text-xs font-mono text-zinc-500 uppercase tracking-widest ml-1 mb-2 block">
-                                Confirm Sequence
+                                Confirm Password
                             </label>
                             <div className="relative group">
                                 <Shield size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-white transition-colors" />
@@ -248,7 +248,7 @@ const ChangePassword = () => {
                             )}
                             {formData.confirmPassword && formData.newPassword === formData.confirmPassword && !errors.confirmPassword && (
                                 <p className="text-xs text-green-400 mt-2 flex items-center gap-1 animate-fade-in">
-                                    <CheckCircle size={12} /> Sequence Match Verified
+                                    <CheckCircle size={12} /> Passwords Match
                                 </p>
                             )}
                         </div>
@@ -262,12 +262,12 @@ const ChangePassword = () => {
                             {loading ? (
                                 <>
                                     <Loader2 size={18} className="animate-spin" />
-                                    ENCRYPTING...
+                                    Updating...
                                 </>
                             ) : (
                                 <>
                                     <Shield size={18} />
-                                    INITIATE PROTOCOL UPDATE
+                                    Change Password
                                 </>
                             )}
                         </button>

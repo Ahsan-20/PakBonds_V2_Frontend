@@ -45,8 +45,8 @@ const ForgotPassword = () => {
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-900/20 border border-blue-500/20 mb-6 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
                         <KeyRound className="w-8 h-8 text-blue-400" />
                     </div>
-                    <h2 className="text-3xl font-bold text-white mb-2">Recovery Protocol</h2>
-                    <p className="text-zinc-400 text-sm uppercase tracking-widest">Restore Access</p>
+                    <h2 className="text-3xl font-bold text-white mb-2">Forgot Password</h2>
+                    <p className="text-zinc-400 text-sm uppercase tracking-widest">Reset Your Password</p>
                 </div>
 
                 <div className="bg-[#0a0a0b]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
@@ -55,11 +55,11 @@ const ForgotPassword = () => {
                     {!emailSent ? (
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <p className="text-zinc-400 text-sm leading-relaxed">
-                                Enter your registered email coordinates. We will transmit a secure recovery link to your inbox.
+                                Enter your email and we'll send you a link to reset your password.
                             </p>
 
                             <div className="space-y-2">
-                                <label className="text-xs font-mono text-blue-400 uppercase tracking-widest ml-1">Email Coordinates</label>
+                                <label className="text-xs font-mono text-blue-400 uppercase tracking-widest ml-1">Email Address</label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                         <Mail className="h-5 w-5 text-zinc-500" />
@@ -84,7 +84,7 @@ const ForgotPassword = () => {
                                     <Loader2 className="animate-spin h-5 w-5" />
                                 ) : (
                                     <>
-                                        TRANSMIT LINK <ArrowRight className="ml-2 h-4 w-4" />
+                                        Send Reset Link <ArrowRight className="ml-2 h-4 w-4" />
                                     </>
                                 )}
                             </button>
@@ -96,7 +96,7 @@ const ForgotPassword = () => {
                                     <ArrowRight className="w-8 h-8" />
                                 </div>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-2">Transmission Successful</h3>
+                            <h3 className="text-xl font-bold text-white mb-2">Email Sent!</h3>
                             <p className="text-zinc-400 text-sm mb-6">
                                 We have sent a recovery link to <span className="text-white font-medium">{email}</span>. Please check your inbox.
                             </p>
