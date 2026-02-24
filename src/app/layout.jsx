@@ -9,7 +9,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import NextTopLoader from 'nextjs-toploader';
 
 export const metadata = {
-    metadataBase: new URL('https://pakbonds.app'),
+    metadataBase: new URL('https://pakbonds.com'),
     title: {
         default: 'PakBonds | Automatic Prize Bond Checker & Portfolio Manager',
         template: '%s | PakBonds',
@@ -22,7 +22,7 @@ export const metadata = {
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        url: 'https://pakbonds.app',
+        url: 'https://pakbonds.com',
         siteName: 'PakBonds',
         title: 'PakBonds | Check Prize Bonds Automatically',
         description: 'Automated draw checking, instant win alerts, and secure portfolio management for Pakistan Prize Bonds.',

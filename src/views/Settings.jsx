@@ -66,42 +66,44 @@ const Settings = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] text-white pt-28 pb-12 px-4 relative overflow-hidden">
+        <div className="min-h-screen relative bg-[#050505] text-white overflow-hidden">
+            {/* ── Ambient Background ── */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:50px_50px]" />
+                <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-cyan-600/10 blur-[150px]" />
+                <div className="absolute bottom-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-purple-600/10 blur-[140px]" />
+            </div>
 
-
-            {/* Background Effects */}
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-cyan-900/5 to-[#050505] pointer-events-none -z-10" />
-            <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-cyan-600/5 rounded-full blur-[120px] pointer-events-none -z-10" />
-            <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-purple-600/5 rounded-full blur-[120px] pointer-events-none -z-10" />
-
-            <div className="max-w-4xl mx-auto">
+            <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-28 pb-12">
                 {/* Header */}
                 <div className="mb-10">
-                    <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-500">
-                        System Configuration
-                    </h1>
-                    <p className="text-zinc-500 mt-2">Manage your preferences and security protocols.</p>
+                    <div className="bg-white/[0.02] p-6 rounded-2xl border border-white/[0.05] backdrop-blur-sm shadow-xl inline-block">
+                        <h1 className="text-3xl font-black text-white tracking-tight">
+                            Settings
+                        </h1>
+                        <p className="text-zinc-500 mt-1 text-sm">Manage your preferences and security.</p>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Sidebar / User Card */}
                     <div className="md:col-span-1 space-y-6">
-                        <div className="bg-[#0a0a0b]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-xl relative overflow-hidden">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-20" />
+                        <div className="bg-white/[0.02] backdrop-blur-md border border-white/[0.08] rounded-2xl p-6 shadow-xl relative overflow-hidden">
+                            <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 opacity-30" />
                             <div className="flex flex-col items-center text-center">
-                                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-white/10 flex items-center justify-center mb-4">
-                                    <User size={32} className="text-white/80" />
+                                <div className="w-20 h-20 rounded-full bg-white/[0.03] border border-white/[0.08] flex items-center justify-center mb-4">
+                                    <User size={32} className="text-white/60" />
                                 </div>
                                 <h3 className="font-bold text-lg">{user?.user_id || 'User'}</h3>
                                 <p className="text-sm text-zinc-500 font-mono mb-4">{user?.email || 'user@example.com'}</p>
 
-                                <div className="w-full h-px bg-white/5 my-4" />
+                                <div className="w-full h-px bg-white/[0.05] my-4" />
 
                                 <button
                                     onClick={handleLogout}
-                                    className="flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors text-sm font-medium"
+                                    className="flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors text-sm font-bold"
                                 >
-                                    <LogOut size={16} /> Disconnect Session
+                                    <LogOut size={16} /> Log Out
                                 </button>
                             </div>
                         </div>
@@ -110,28 +112,28 @@ const Settings = () => {
                     {/* Main Settings Area */}
                     <div className="md:col-span-2 space-y-6">
 
-                        {/* Notification Hub */}
-                        <div className="bg-[#0a0a0b]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-xl">
+                        {/* Notifications */}
+                        <div className="bg-white/[0.02] backdrop-blur-md border border-white/[0.08] rounded-2xl p-6 shadow-xl">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="p-2 bg-cyan-500/10 rounded-lg text-cyan-400">
+                                <div className="p-2.5 bg-cyan-500/10 rounded-xl text-cyan-400 border border-cyan-500/20">
                                     <Bell size={20} />
                                 </div>
                                 <div>
-                                    <h2 className="text-lg font-bold">Alert Protocols</h2>
-                                    <p className="text-xs text-zinc-500">Configure your neural notification stream.</p>
+                                    <h2 className="text-lg font-bold">Notifications</h2>
+                                    <p className="text-xs text-zinc-500">Choose what you want to be notified about.</p>
                                 </div>
                             </div>
 
-                            <div className="space-y-4">
+                            <div className="space-y-3">
                                 {/* Win Alerts */}
-                                <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/5 hover:border-cyan-500/30 transition-colors group">
+                                <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/[0.05] hover:border-white/[0.1] transition-colors group">
                                     <div className="flex items-center gap-4">
-                                        <div className="p-2 bg-yellow-500/10 rounded-lg text-yellow-500 opacity-50 group-hover:opacity-100 transition-opacity">
+                                        <div className="p-2 bg-amber-500/10 rounded-lg text-amber-400 border border-amber-500/20 opacity-60 group-hover:opacity-100 transition-opacity">
                                             <Smartphone size={18} />
                                         </div>
                                         <div>
-                                            <h4 className="font-medium text-sm">Prize Win Alerts</h4>
-                                            <p className="text-xs text-zinc-500">Immediate notification when a bond wins.</p>
+                                            <h4 className="font-bold text-sm">Prize Win Alerts</h4>
+                                            <p className="text-xs text-zinc-500">Get notified when your bond wins a prize.</p>
                                         </div>
                                     </div>
                                     <button
@@ -143,13 +145,13 @@ const Settings = () => {
                                 </div>
 
                                 {/* Draw Reminders */}
-                                <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/5 hover:border-cyan-500/30 transition-colors group">
+                                <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/[0.05] hover:border-white/[0.1] transition-colors group">
                                     <div className="flex items-center gap-4">
-                                        <div className="p-2 bg-purple-500/10 rounded-lg text-purple-500 opacity-50 group-hover:opacity-100 transition-opacity">
+                                        <div className="p-2 bg-purple-500/10 rounded-lg text-purple-400 border border-purple-500/20 opacity-60 group-hover:opacity-100 transition-opacity">
                                             <Mail size={18} />
                                         </div>
                                         <div>
-                                            <h4 className="font-medium text-sm">Draw Reminders</h4>
+                                            <h4 className="font-bold text-sm">Draw Reminders</h4>
                                             <p className="text-xs text-zinc-500">Email reminder 24h before scheduled draws.</p>
                                         </div>
                                     </div>
@@ -162,14 +164,14 @@ const Settings = () => {
                                 </div>
 
                                 {/* Security Alerts */}
-                                <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/5 hover:border-cyan-500/30 transition-colors group">
+                                <div className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/[0.05] hover:border-white/[0.1] transition-colors group">
                                     <div className="flex items-center gap-4">
-                                        <div className="p-2 bg-red-500/10 rounded-lg text-red-500 opacity-50 group-hover:opacity-100 transition-opacity">
+                                        <div className="p-2 bg-red-500/10 rounded-lg text-red-400 border border-red-500/20 opacity-60 group-hover:opacity-100 transition-opacity">
                                             <Shield size={18} />
                                         </div>
                                         <div>
-                                            <h4 className="font-medium text-sm">Security Alerts</h4>
-                                            <p className="text-xs text-zinc-500">Notify on new device logins or password changes.</p>
+                                            <h4 className="font-bold text-sm">Security Alerts</h4>
+                                            <p className="text-xs text-zinc-500">Get notified on new device logins or password changes.</p>
                                         </div>
                                     </div>
                                     <button
@@ -183,27 +185,27 @@ const Settings = () => {
                         </div>
 
                         {/* Security Settings */}
-                        <div className="bg-[#0a0a0b]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-xl">
+                        <div className="bg-white/[0.02] backdrop-blur-md border border-white/[0.08] rounded-2xl p-6 shadow-xl">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="p-2 bg-purple-500/10 rounded-lg text-purple-400">
+                                <div className="p-2.5 bg-purple-500/10 rounded-xl text-purple-400 border border-purple-500/20">
                                     <Shield size={20} />
                                 </div>
                                 <div>
                                     <h2 className="text-lg font-bold">Security</h2>
-                                    <p className="text-xs text-zinc-500">Access control and credentials.</p>
+                                    <p className="text-xs text-zinc-500">Manage your account security.</p>
                                 </div>
                             </div>
 
                             <div
                                 onClick={() => router.push('/change-password')}
-                                className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/5 hover:border-purple-500/30 cursor-pointer transition-all group"
+                                className="flex items-center justify-between p-4 bg-white/[0.02] rounded-xl border border-white/[0.05] hover:border-purple-500/30 cursor-pointer transition-all group"
                             >
                                 <div className="flex items-center gap-4">
-                                    <div className="p-2 bg-zinc-800 rounded-lg text-zinc-400 group-hover:text-white transition-colors">
+                                    <div className="p-2 bg-white/[0.03] rounded-lg text-zinc-400 border border-white/[0.05] group-hover:text-white group-hover:border-purple-500/30 transition-all">
                                         <Key size={18} />
                                     </div>
                                     <div>
-                                        <h4 className="font-medium text-sm group-hover:text-white transition-colors">Change Access Key</h4>
+                                        <h4 className="font-bold text-sm group-hover:text-white transition-colors">Change Password</h4>
                                         <p className="text-xs text-zinc-500">Update your password securely.</p>
                                     </div>
                                 </div>
@@ -219,7 +221,3 @@ const Settings = () => {
 };
 
 export default Settings;
-
-
-
-

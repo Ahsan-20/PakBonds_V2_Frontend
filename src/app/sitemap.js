@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 export default function sitemap() {
-    const baseUrl = 'https://pakbonds.app';
+    const baseUrl = 'https://pakbonds.com';
 
     // 1. Core Platform Pages
     const routes = [

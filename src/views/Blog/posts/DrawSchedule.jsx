@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 
 const events = [
-    { month: 'JAN', day: '15', bonds: [{ label: 'Rs. 750 Bond', color: 'text-purple-400', bg: 'bg-purple-500/20' }], title: 'Draw No. 105', sub: 'First Prize: Rs. 1,500,000 — Peshawar' },
-    { month: 'FEB', day: '16', bonds: [{ label: 'Rs. 100 Bond', color: 'text-cyan-400', bg: 'bg-cyan-500/20' }, { label: 'Rs. 1,500 Bond', color: 'text-pink-400', bg: 'bg-pink-500/20' }], title: 'Combined Draws (Karachi / Lahore)', sub: '100 Bond (Draw 53) & 1500 Bond (Draw 109)' },
-    { month: 'MAR', day: '10', bonds: [{ label: 'Premium 25k', color: 'text-amber-400', bg: 'bg-amber-500/20' }, { label: 'Premium 40k', color: 'text-rose-400', bg: 'bg-rose-500/20' }], title: 'Premium Bond Draws', sub: 'Multan & Rawalpindi' },
+    { month: 'JAN', day: '15', bonds: [{ label: 'Rs. 750 Bond', color: 'text-purple-400', bg: 'bg-purple-500/20' }], title: 'Draw No. 105', sub: 'First Prize: Rs. 1,500,000' },
+    { month: 'FEB', day: '16', bonds: [{ label: 'Rs. 100 Bond', color: 'text-cyan-400', bg: 'bg-cyan-500/20' }, { label: 'Rs. 1,500 Bond', color: 'text-pink-400', bg: 'bg-pink-500/20' }], title: 'Combined Draws', sub: '100 Bond & 1500 Bond' },
+    { month: 'MAR', day: '10', bonds: [{ label: 'Premium 25k', color: 'text-amber-400', bg: 'bg-amber-500/20' }, { label: 'Premium 40k', color: 'text-rose-400', bg: 'bg-rose-500/20' }], title: 'Premium Bond Draws', sub: '25,000 and 40,000 Premium Bonds' },
+    { month: 'MAR', day: '16', bonds: [{ label: 'Rs. 200 Bond', color: 'text-emerald-400', bg: 'bg-emerald-500/20' }], title: 'Draw No. 101', sub: 'First Prize: Rs. 750,000' },
 ];
 
 export default function DrawSchedule() {

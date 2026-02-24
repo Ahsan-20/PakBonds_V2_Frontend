@@ -103,30 +103,30 @@ const SectionHeader = ({ title, subtitle }) => (
 
 // Large Command Card (Quick Actions)
 const CommandCard = ({ title, subtitle, icon: Icon, href, gradient }) => (
-    <Link href={href} className="group relative overflow-hidden rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300 h-32 flex flex-col justify-between p-6 bg-white/[0.02] hover:bg-white/[0.04]">
-        <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity bg-gradient-to-br ${gradient}`} />
+    <Link href={href} className="group relative overflow-hidden rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-500 h-32 flex flex-col justify-between p-6 bg-white/[0.02] hover:bg-white/[0.04] hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50">
+        <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${gradient}`} />
         <div className="relative z-10 flex justify-between items-start">
-            <div className={`p-2 rounded-lg bg-white/5 border border-white/5 group-hover:scale-110 transition-transform duration-300`}>
-                <Icon className="text-white w-6 h-6" />
+            <div className={`p-2.5 rounded-xl bg-white/5 border border-white/10 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500`}>
+                <Icon className="text-white/80 group-hover:text-white w-6 h-6 transition-colors" />
             </div>
-            <ArrowRight className="text-white/20 group-hover:text-white transition-colors" />
+            <ArrowRight className="text-white/20 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
         </div>
         <div className="relative z-10">
-            <h3 className="text-lg font-bold text-white tracking-tight">{title}</h3>
-            <p className="text-xs text-zinc-500 font-mono uppercase tracking-wider">{subtitle}</p>
+            <h3 className="text-lg font-bold text-white tracking-tight leading-snug">{title}</h3>
+            <p className="text-xs text-zinc-500 font-mono uppercase tracking-wider mt-0.5">{subtitle}</p>
         </div>
     </Link>
 );
 
 // Stat Widget
 const StatWidget = ({ label, value, subtext, icon: Icon, accentClass = "text-cyan-400" }) => (
-    <div className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-        <div className={`p-3 rounded-lg bg-white/[0.02] border border-white/[0.05] ${accentClass}`}>
-            <Icon size={20} />
+    <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.1] transition-colors shadow-lg">
+        <div className={`p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.05] ${accentClass} shadow-inner`}>
+            <Icon size={22} />
         </div>
         <div>
-            <div className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-0.5">{label}</div>
-            <div className={`text-2xl font-bold text-white font-mono leading-none`}>{value}</div>
+            <div className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-1">{label}</div>
+            <div className={`text-2xl md:text-3xl font-bold text-white font-mono leading-none tracking-tight`}>{value}</div>
         </div>
     </div>
 );
@@ -174,14 +174,14 @@ const DrawScheduleWidget = () => {
                 {loading && <Loader2 size={14} className="animate-spin text-zinc-500" />}
             </div>
 
-            <div className="p-4 grid grid-cols-6 gap-2">
+            <div className="p-4 grid grid-cols-3 sm:grid-cols-6 gap-2">
                 {DENOMINATIONS.map(d => (
                     <button
                         key={d.value}
                         onClick={() => setSelected(d)}
-                        className={`col-span-1 py-2 text-[10px] font-mono border rounded transition-all ${selected.value === d.value
-                            ? `${d.border} ${d.color} bg-white/[0.05]`
-                            : 'border-transparent text-zinc-600 hover:text-zinc-400 hover:bg-white/[0.02]'
+                        className={`col-span-1 py-2 text-xs font-mono font-bold border rounded-xl transition-all duration-300 ${selected.value === d.value
+                            ? `${d.border} ${d.color} bg-white/[0.08] shadow-[inset_0_0_15px_rgba(255,255,255,0.02)] translate-y-0.5`
+                            : 'border-white/5 text-zinc-500 hover:text-white hover:bg-white/[0.04] hover:border-white/10'
                             }`}
                     >
                         {d.label}
@@ -265,8 +265,15 @@ const Dashboard = () => {
     if (loading) return <LoadingScreen message="Loading Dashboard..." />;
 
     return (
-        <div className="min-h-screen bg-[#050505] text-white">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-12">
+        <div className="min-h-screen relative bg-[#050505] text-white overflow-hidden">
+            {/* ── Ambient Background ── */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:50px_50px]" />
+                <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-cyan-600/10 blur-[150px]" />
+                <div className="absolute bottom-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-indigo-600/10 blur-[140px]" />
+            </div>
+
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-12">
 
                 {!isEmailVerified && (
                     <div className="mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-start gap-3">
@@ -280,13 +287,13 @@ const Dashboard = () => {
 
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
-                    <div className="space-y-1">
-                        <div className="flex items-center gap-2 text-xs font-mono text-emerald-500 mb-1">
-                            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                            SYSTEM ONLINE
+                    <div className="space-y-1 bg-white/[0.02] p-5 rounded-2xl border border-white/[0.05] backdrop-blur-sm self-start inline-block">
+                        <div className="flex items-center gap-2 text-[10px] font-mono text-emerald-500 mb-2 uppercase tracking-widest bg-emerald-500/10 w-fit px-2.5 py-1 rounded-full border border-emerald-500/20">
+                            <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+                            Secure Session
                         </div>
-                        <h1 className="text-3xl font-bold tracking-tight">
-                            User <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">{username}</span>
+                        <h1 className="text-3xl font-black tracking-tight leading-none text-white">
+                            User <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500">{username}</span>
                         </h1>
                     </div>
 
@@ -335,26 +342,35 @@ const Dashboard = () => {
 
                     {/* Left: Net Value Card (Holographic) */}
                     <div className="lg:col-span-2">
-                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-900/20 to-black border border-white/10 p-8 h-full flex flex-col justify-center group">
-                            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
-                            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-700">
-                                <Globe size={120} />
+                        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#0a0f18] via-black to-[#050505] border border-white/[0.08] p-8 md:p-12 h-full flex flex-col justify-center group hover:border-white/[0.15] transition-colors duration-500 shadow-2xl">
+                            {/* Animated glowing mesh behind the numbers */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[150%] bg-[radial-gradient(ellipse_at_center,rgba(6,182,212,0.1)_-20%,transparent_60%)] pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity duration-1000" />
+
+                            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03]" />
+                            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity duration-700 scale-150 -translate-y-1/4 translate-x-1/4 blur-[2px]">
+                                <Globe size={200} />
                             </div>
 
-                            <div className="relative z-10">
-                                <div className="text-sm font-mono text-indigo-300 uppercase tracking-widest mb-2">Net Realized Value</div>
-                                <div className="text-5xl md:text-6xl font-black font-mono tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">
-                                    <span className="text-3xl text-zinc-500 mr-2">PKR</span>
-                                    {loading ? '---' : formatCompactNumber(wins.total_amount)}
+                            <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-8 w-full">
+                                <div>
+                                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-950/40 border border-cyan-500/20 mb-6 backdrop-blur-md">
+                                        <ShieldCheck size={12} className="text-cyan-400" />
+                                        <span className="text-[10px] font-mono text-cyan-300 tracking-widest uppercase">Verified Realized Value</span>
+                                    </div>
+                                    <div className="text-5xl sm:text-6xl md:text-7xl font-black font-mono tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-500 drop-shadow-sm flex items-baseline">
+                                        <span className="text-2xl sm:text-3xl md:text-4xl text-zinc-500 mr-3 font-bold tracking-tight">PKR</span>
+                                        {loading ? '---' : formatCompactNumber(wins.total_amount)}
+                                    </div>
                                 </div>
-                                <div className="mt-6 flex items-center gap-2">
-                                    <div className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono flex items-center gap-1">
-                                        <TrendingUp size={12} />
+
+                                <div className="flex flex-col gap-3 shrink-0">
+                                    <div className="px-4 py-2.5 rounded-xl bg-emerald-500/[0.08] border border-emerald-500/20 text-emerald-400 text-sm font-semibold flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.05)]">
+                                        <TrendingUp size={16} />
                                         <span>Active Portfolio</span>
                                     </div>
-                                    <Link href="/download" className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white text-xs font-mono transition-colors flex items-center gap-1">
-                                        <Download size={12} />
-                                        <span>Export Data</span>
+                                    <Link href="/download" className="px-4 py-2.5 rounded-xl bg-white/[0.05] border border-white/10 text-white hover:bg-white/[0.08] hover:border-white/20 text-sm font-semibold transition-all flex items-center justify-center gap-2 group/btn">
+                                        <Download size={16} className="group-hover/btn:-translate-y-0.5 transition-transform" />
+                                        <span>Export Ledger</span>
                                     </Link>
                                 </div>
                             </div>

@@ -189,7 +189,7 @@ const BlogIndex = () => {
                                         </h2>
                                         <p className="text-sm text-zinc-500 leading-relaxed flex-1">{post.desc}</p>
                                         <div className={`flex items-center justify-between mt-5 pt-4 border-t border-white/[0.05]`}>
-                                            <span className={`text-xs font-mono text-zinc-600`}>pakbonds.app</span>
+                                            <span className={`text-xs font-mono text-zinc-600`}>pakbonds.com</span>
                                             <span className={`text-xs ${post.color} font-semibold group-hover:underline flex items-center gap-1`}>
                                                 Read <ArrowRight size={12} />
                                             </span>

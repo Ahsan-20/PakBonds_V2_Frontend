@@ -18,6 +18,6 @@ export default function robots() {
                 '/bonds/[message]',
             ],
         },
-        sitemap: 'https://pakbonds.app/sitemap.xml',
+        sitemap: 'https://pakbonds.com/sitemap.xml',
     };
 }
